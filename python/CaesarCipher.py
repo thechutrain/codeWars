@@ -33,42 +33,37 @@ class CaesarCipher(object):
 				self.encoded_list.append(num)
 			except:
 				self.encoded_list.append(letter)
-		# print self.encoded_list ## returns [8, 20, 9, 10, 2, 6, 23, 24, '!']
 
-			# num = CaesarCipher.abc_dict[letter.upper()]
-			# # ENCODE - Add the shift value 
-			# num += self.shift
-			# if num > 26:
-			# 	num -= 26
-			# self.encoded_list.append(num)
-
-		####### Data Type ######
-		# for num in self.encoded_list:
-		# 	print type(num)
-		####### SUPER WEIRD ##########
 		for num in self.encoded_list:
 			if type(num) == int:
 				# print [letter for letter, number in CaesarCipher.abc_dict.items() if number == num][0]
 				self.return_encoded += [letter for letter, number in CaesarCipher.abc_dict.items() if number == num][0]
 			else:
 				self.return_encoded += num
-		print self.return_encoded
+		return self.return_encoded
 
-	# def decode(self, str_arg):
-	# 	for letter in str_arg.upper():
-	# 		num = CaesarCipher.abc_dict[letter]
-	# 		# DECODE - subtract the shift value
-	# 		num -= self.shift
-	# 		if num < 1:
-	# 			num += 26
-	# 		self.decoded_list.append(num)
+	def decode(self, str_arg):
+		for letter in str_arg:
+			try: 
+				num = CaesarCipher.abc_dict[letter.upper()]
+				print num
+				# DECODE - subtract the shift value
+				num -= self.shift
+				if num < 1:
+					num += 26
+				self.decoded_list.append(num)
+			except:
+				self.decoded_list.append(letter)
 
-	# 	for num in self.decoded_list:
-	# 		self.return_decoded += [letter for letter, number in CaesarCipher.abc_dict.items() if number == num][0]
-	# 	return self.return_decoded
+		for num in self.decoded_list:
+			if type(num) == int:
+				self.return_decoded += [letter for letter, number in CaesarCipher.abc_dict.items() if number == num][0]
+			else:
+				self.return_decoded += num
+		return self.return_decoded
 
 ## testing ###
 c = CaesarCipher(5); # creates a CipherHelper with a shift of five
 print c.encode('Code#wars!') # returns 'HTIJBFWX'
-# print c.decode('BFKKQJX') # returns 'WAFFLES'
+print c.decode('BF#KKQJX') # returns 'WAFFLES'
 # [3, 15, 4, 5, 23, 1, 18, 19]
